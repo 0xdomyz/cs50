@@ -5,7 +5,9 @@ CS50 learning
 Installation
 -------------------
 
-`vid <https://cs50.harvard.edu>`_
+`base vid <https://cs50.harvard.edu>`_
+
+`ext vid <https://www.youtube.com/playlist?list=PLhQjrBD2T380xvFSUmToMMzERZ3qB5Ueu>`_
 
 `vscode tute wsl <https://code.visualstudio.com/docs/cpp/config-wsl>`_
 
@@ -24,9 +26,4 @@ Usage
 .. code:: console
 
     make test
-
-
-
-
-
-
+    
