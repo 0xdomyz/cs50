@@ -5,9 +5,7 @@ CS50 learning
 Installation
 -------------------
 
-`base vid <https://cs50.harvard.edu>`_
-
-`ext vid <https://www.youtube.com/playlist?list=PLhQjrBD2T380xvFSUmToMMzERZ3qB5Ueu>`_
+`base <https://cs50.harvard.edu>`_
 
 `vscode tute wsl <https://code.visualstudio.com/docs/cpp/config-wsl>`_
 
@@ -15,6 +13,11 @@ Installation
 
 `python lib <https://cs50.readthedocs.io/projects/lib50/en/latest/>`_
 
+
+`web <https://cs50.harvard.edu/web/2020/>`_
+
+
+`art <https://cs50.harvard.edu/ai/2020/>`_
 
 Usage
 ---------
