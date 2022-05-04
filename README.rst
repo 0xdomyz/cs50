@@ -1,5 +1,5 @@
 ===============
-CS50 learning
+CS50 codes
 ===============
 
 Installation
@@ -18,6 +18,10 @@ Installation
 `art <https://cs50.harvard.edu/ai/2020/>`_
 
 `tech <https://www.youtube.com/playlist?list=PLhQjrBD2T382p8amnvUp1rws1p7n7gJ2p>`_
+
+`game <https://www.youtube.com/playlist?list=PLhQjrBD2T382mHvZB-hSYWvoLzYQzT_Pb>`_
+
+`android <https://www.youtube.com/playlist?list=PLhQjrBD2T381qULidYDKP55-4u1piASC1>`_
 
 Usage
 ---------
