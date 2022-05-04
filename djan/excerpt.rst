@@ -100,6 +100,8 @@ Tasks
 --------------
 Form input.
 
+Form obj, post request, csrf.
+
 views::
 
     from django.http import HttpResponseRedirect
