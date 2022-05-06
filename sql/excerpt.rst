@@ -236,5 +236,71 @@ Templates:
 Book flight
 -------------
 
+Urls::
+
+    path("<int:flight_id>/book", views.book, name="book")
+
+Views::
+
+    from django.http import HttpResponseRedirect
+    from django.urls import reverse
+    from .models import Flight, Passenger
+
+    def flight(request, flight_id):
+        flight = Flight.objects.get(pk=flight_id)
+        return render(request, "flights/flight.html", {
+            "flight": flight,
+            "passengers": flight.passengers.all(),
+            "non_passengers": Passenger.objects.exclude(flights=flight).all()
+        })
+
+    def book(request, flight_id):
+        if request.method == "POST":
+            print(request.POST["passenger"])
+            flight = Flight.objects.get(pk=flight_id)
+            passenger = Passenger.objects.get(pk=int(request.POST["passenger"]))
+            passenger.flights.add(flight)
+            return HttpResponseRedirect(reverse("flight", args=(flight.id,)))
+
+
+Teamplates:
+
+.. code-block:: console
+
+    <h2>Add passenger</h2>
+
+    <form action="{% url 'book' flight.id %}" method="post">
+        {% csrf_token %}
+        <select name="passenger">
+            {% for passenger in non_passengers %}
+                <option value="{{ passenger.id }}"> {{ passenger }}</option>
+            {% endfor %}
+        </select>
+        <input type="submit">
+    </form>
+
+Customise admin UI
+-----------------------
+
+Admin::
+
+    class FlightAdmin(admin.ModelAdmin):
+        list_display = ("id", "origin", "destination", "duration")
+
+    class PassengerAdmin(admin.ModelAdmin):
+        filter_horizontal = ("flights",)
+
+    admin.site.register(Flight, FlightAdmin)
+    admin.site.register(Airport)
+    admin.site.register(Passenger, PassengerAdmin)
+
+
+Authentication
+-------------------
+
+
+
+
+
 
 
