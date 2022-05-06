@@ -109,7 +109,7 @@ Add code to urls, views, templates::
             "flights": Flight.objects.all()
         })
 
-.. code-block:: console
+.. code-block:: html
 
     <!DOCTYPE html>
     <html>
@@ -159,7 +159,7 @@ Add code to urls, views, templates::
             "flight": flight
         })
 
-.. code-block:: console
+.. code-block:: html
 
     {% extends "flights/layout.html" %}
 
@@ -213,7 +213,7 @@ Views::
 
 Templates:
 
-.. code-block:: console
+.. code-block:: html
 
     <li>
         <a href="{% url 'flight' flight.id %}">
@@ -221,7 +221,7 @@ Templates:
         </a>
     </li>
 
-.. code-block:: console
+.. code-block:: html
 
     <ul>
         {% for passenger in passengers %}
@@ -265,7 +265,7 @@ Views::
 
 Teamplates:
 
-.. code-block:: console
+.. code-block:: html
 
     <h2>Add passenger</h2>
 
@@ -298,9 +298,109 @@ Admin::
 Authentication
 -------------------
 
+Install user:
+
+.. code-block:: console
+
+    python manage.py startapp users
+
+Urls::
+
+    from django.urls import path
+
+    from . import views
+
+    urlpatterns = [
+        path("", views.index, name="index"),
+        path("login", views.login_view, name="login"),
+        path("logout", views.logout_view, name="logout"),
+    ]
 
 
+Views::
+
+    from django.contrib.auth import authenticate, login, logout
+    from django.http import HttpResponseRedirect
+    from django.shortcuts import render
+    from django.urls import reverse
+
+    def index(request):
+        if not request.user.is_authenticated:
+            return HttpResponseRedirect(reverse("login"))
+        return render(request, "users/user.html")
+
+    def login_view(request):
+        if request.method == 'POST':
+            username = request.POST["username"]
+            password = request.POST["password"]
+            user = authenticate(request, username=username, password=password)
+            if user is not None:
+                login(request, user)
+                return HttpResponseRedirect(reverse("index"))
+            else:
+                return render(request, "users/login.html", {
+                    "message": "Invalid credentials"
+                })
+        return render(request, "users/login.html")
+
+    def logout_view(request):
+        logout(request)
+        return render(request, "users/login.html", {
+            "message": "Logged out."
+        })
 
 
+Templates:
+
+.. code-block:: html
+
+    <!DOCTYPE html>
+    <html lang="en">
+        <head>
+            <title>Users</title>
+        </head>
+        <body>
+            {% block body %}
+            {% endblock %}
+        </body>
+    </html>
+
+.. code-block:: html
+
+    {% extends "users/layout.html" %}
+    {% block body %}
+
+        <h1>Welcome, {{ request.user.first_name }}</h1>
+
+        <ul>
+            <li>Username: {{ request.user.username }}</li>
+            <li>Email: {{ request.user.email }}</li>
+        </ul>
+
+        <a href="{% url 'logout' %}">Log out</a>
+
+    {% endblock %}
+
+
+.. code-block:: html
+
+    {% extends "users/layout.html" %}
+    {% block body %}
+
+        {% if message %}
+            <div>{{ message }}</div>
+        {% endif %}
+
+        <form action="{% url 'login' %}" method="post">
+            {% csrf_token %}
+            <input type="text" name="username" placeholder="Username">
+            <input type="password" name="password" placeholder="Password">
+            <input type="submit" value="Login">
+        </form>
+
+    {% endblock %}
+
+
+Create user on admin page.
 
 
