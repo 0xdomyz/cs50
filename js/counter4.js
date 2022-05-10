@@ -1,15 +1,14 @@
 let counter = 0;
-
-document.addEventListener('DOMContentLoaded', function() {
-    document.querySelector('button').onclick = count;
-});
-
-function count() {
+function count(){
     counter++;
-
-    if (counter % 10 === 0) {
-        alert(`Count is now ${counter}`);
+    document.querySelector("h1").innerHTML = counter;
+    if (counter % 10 === 0){
+        alert(`The counter is now ${counter}`)
     }
 
-    document.querySelector('h1').innerHTML = counter;
 }
+
+document.addEventListener("DOMContentLoaded", function(){
+    // document.querySelector("button").onclick = count;
+    document.querySelector("button").addEventListener("click", count)
+});

@@ -4,11 +4,10 @@
         <title>Hello!</title>
         <script>
             function hello() {
-                const heading = document.querySelector('h1');
-                if (heading.innerHTML === 'Hello!') {
-                    heading.innerHTML = 'Goodbye!';
+                if (document.querySelector("h1").innerHTML === "Hello!"){
+                    document.querySelector("h1").innerHTML = "goodbye";
                 } else {
-                    heading.innerHTML = 'Hello!';
+                    document.querySelector("h1").innerHTML = "Hello!";
                 }
             }
         </script>

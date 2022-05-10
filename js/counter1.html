@@ -4,9 +4,12 @@
         <title>Count</title>
         <script>
             let counter = 0;
-            function count() {
+            function count(){
                 counter++;
-                document.querySelector('h1').innerHTML = counter;
+                document.querySelector("h1").innerHTML = counter;
+                if (counter % 10 === 0){
+                    alert(`The counter is now ${counter}`)
+                }
             }
         </script>
     </head>
